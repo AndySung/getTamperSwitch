@@ -1,0 +1,58 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/Users/andy/Downloads/getTamperSwitch",
+      "sdkFolder": "/Users/andy/Documents/AndroidSdk/Android/sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/Users/andy/Downloads/getTamperSwitch/app/build/intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "/Users/andy/Downloads/getTamperSwitch/app",
+      "makeFile": "/Users/andy/Downloads/getTamperSwitch/app/src/main/acStatus/Android.mk",
+      "buildSystem": "NDK_BUILD",
+      "compilerSettingsCacheFolder": "/Users/andy/Downloads/getTamperSwitch/.cxx",
+      "cxxFolder": "/Users/andy/Downloads/getTamperSwitch/app/.cxx",
+      "ndkFolder": "/Users/andy/Documents/AndroidSdk/Android/sdk/ndk/25.1.8937393",
+      "ndkVersion": "25.1.8937393",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "soFolder": "/Users/andy/Downloads/getTamperSwitch/app/build/intermediates/ndkBuild/debug/lib",
+    "objFolder": "/Users/andy/Downloads/getTamperSwitch/app/build/intermediates/ndkBuild/debug/obj/local",
+    "jsonFolder": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/ndkBuild/debug",
+    "gradleBuildOutputFolder": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/cxx/debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARM64_V8A",
+  "abiPlatformVersion": 19,
+  "cxxBuildFolder": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/ndkBuild/debug/arm64-v8a",
+  "jsonFile": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/ndkBuild/debug/arm64-v8a/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/cxx/debug/arm64-v8a",
+  "objFolder": "/Users/andy/Downloads/getTamperSwitch/app/build/intermediates/ndkBuild/debug/obj/local/arm64-v8a",
+  "buildCommandFile": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/ndkBuild/debug/arm64-v8a/build_command.txt",
+  "buildOutputFile": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/ndkBuild/debug/arm64-v8a/build_output.txt",
+  "modelOutputFile": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/ndkBuild/debug/arm64-v8a/build_model.json",
+  "jsonGenerationLoggingRecordFile": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/ndkBuild/debug/arm64-v8a/json_generation_record.json",
+  "compileCommandsJsonFile": "/Users/andy/Downloads/getTamperSwitch/app/.cxx/ndkBuild/debug/arm64-v8a/compile_commands.json"
+}

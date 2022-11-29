@@ -1,0 +1,57 @@
+{
+  "ndkFolder": "/Users/andy/Documents/AndroidSdk/Android/sdk/ndk/25.1.8937393",
+  "messages": [
+    {
+      "level": "INFO",
+      "message": "android.ndkVersion from module build.gradle is not set"
+    },
+    {
+      "level": "INFO",
+      "message": "ndk.dir in local.properties is not set"
+    },
+    {
+      "level": "INFO",
+      "message": "ANDROID_NDK_HOME environment variable is not set"
+    },
+    {
+      "level": "INFO",
+      "message": "sdkFolder is /Users/andy/Documents/AndroidSdk/Android/sdk"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering /Users/andy/Documents/AndroidSdk/Android/sdk/ndk-bundle in SDK ndk-bundle folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering /Users/andy/Documents/AndroidSdk/Android/sdk/ndk/20.1.5948944 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering /Users/andy/Documents/AndroidSdk/Android/sdk/ndk/21.4.7075529 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering /Users/andy/Documents/AndroidSdk/Android/sdk/ndk/16.1.4479499 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering /Users/andy/Documents/AndroidSdk/Android/sdk/ndk/20.0.5594570 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering /Users/andy/Documents/AndroidSdk/Android/sdk/ndk/25.1.8937393 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering /Users/andy/Documents/AndroidSdk/Android/sdk/ndk/23.2.8568313 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering /Users/andy/Documents/AndroidSdk/Android/sdk/ndk/23.1.7779620 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "No user requested version, choosing /Users/andy/Documents/AndroidSdk/Android/sdk/ndk/25.1.8937393 which is version 25.1.8937393"
+    }
+  ]
+}

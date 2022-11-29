@@ -1,0 +1,16 @@
+Executable : E:\Android_studio\Android_SDK\ndk\21.1.6352462\ndk-build.cmd
+arguments : 
+NDK_PROJECT_PATH=null
+APP_BUILD_SCRIPT=D:\pro_AndroidStudio\getTamperSwitch\app\src\main\acStatus\Android.mk
+APP_ABI=arm64-v8a
+NDK_ALL_ABIS=arm64-v8a
+NDK_DEBUG=0
+APP_PLATFORM=android-16
+NDK_OUT=D:/pro_AndroidStudio/getTamperSwitch/app/build/intermediates/ndkBuild/release/obj
+NDK_LIBS_OUT=D:\pro_AndroidStudio\getTamperSwitch\app\build\intermediates\ndkBuild\release\lib
+APP_SHORT_COMMANDS=false
+LOCAL_SHORT_COMMANDS=false
+-B
+-n
+jvmArgs : 
+

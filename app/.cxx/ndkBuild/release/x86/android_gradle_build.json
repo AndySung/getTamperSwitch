@@ -1,0 +1,33 @@
+{
+  "buildFiles": [
+    "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\src\\main\\tamperBtnStatus\\Android.mk"
+  ],
+  "cleanCommands": [
+    "E:\\AndroidStudioSDK\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dE:\\pro_AndroidStudio\\getTamperSwitch\\app\\src\\main\\tamperBtnStatus\\Android.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-16 NDK_OUT\u003dE:/pro_AndroidStudio/getTamperSwitch/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dE:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\release\\lib clean"
+  ],
+  "buildTargetsCommand": "E:\\AndroidStudioSDK\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dE:\\pro_AndroidStudio\\getTamperSwitch\\app\\src\\main\\tamperBtnStatus\\Android.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-16 NDK_OUT\u003dE:/pro_AndroidStudio/getTamperSwitch/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dE:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\release\\lib {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "tamperBtnStatus-release-x86": {
+      "buildCommand": "E:\\AndroidStudioSDK\\ndk-bundle\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dE:\\pro_AndroidStudio\\getTamperSwitch\\app\\src\\main\\tamperBtnStatus\\Android.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-16 NDK_OUT\u003dE:/pro_AndroidStudio/getTamperSwitch/app/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dE:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\release\\lib E:/pro_AndroidStudio/getTamperSwitch/app/build/intermediates/ndkBuild/release/obj/local/x86/libtamperBtnStatus.so",
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "tamperBtnStatus",
+      "files": [
+        {
+          "src": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\src\\main\\tamperBtnStatus\\tamperBtnStatus.c",
+          "flags": "-target i686-none-linux-android16 -fdata-sections -ffunction-sections -fstack-protector-strong -funwind-tables -no-canonical-prefixes --sysroot E:/AndroidStudioSDK/ndk-bundle/build//../toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -Wno-invalid-command-line-argument -Wno-unused-command-line-argument -D_FORTIFY_SOURCE\u003d2 -fPIC -O2 -DNDEBUG -IE:/pro_AndroidStudio/getTamperSwitch/app/src/main/tamperBtnStatus -DANDROID -Wformat -Werror\u003dformat-security -mstackrealign"
+        }
+      ],
+      "output": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86\\libtamperBtnStatus.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-x86": {
+      "cCompilerExecutable": "E:\\AndroidStudioSDK\\ndk-bundle\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

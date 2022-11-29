@@ -1,0 +1,58 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "D:\\pro_AndroidStudio\\getTamperSwitch",
+      "sdkFolder": "E:\\Android_studio\\Android_SDK",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app",
+      "makeFile": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\src\\main\\acStatus\\Android.mk",
+      "buildSystem": "NDK_BUILD",
+      "compilerSettingsCacheFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\.cxx",
+      "cxxFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx",
+      "ndkFolder": "E:\\Android_studio\\Android_SDK\\ndk\\21.1.6352462",
+      "ndkVersion": "21.1.6352462",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "soFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\debug\\lib",
+    "objFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\debug\\obj\\local",
+    "jsonFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\debug",
+    "gradleBuildOutputFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\cxx\\debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "ARMEABI_V7A",
+  "abiPlatformVersion": 16,
+  "cxxBuildFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\debug\\armeabi-v7a",
+  "jsonFile": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\debug\\armeabi-v7a\\android_gradle_build.json",
+  "gradleBuildOutputFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\cxx\\debug\\armeabi-v7a",
+  "objFolder": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\armeabi-v7a",
+  "buildCommandFile": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\debug\\armeabi-v7a\\build_command.txt",
+  "buildOutputFile": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\debug\\armeabi-v7a\\build_output.txt",
+  "modelOutputFile": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\debug\\armeabi-v7a\\build_model.json",
+  "jsonGenerationLoggingRecordFile": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\debug\\armeabi-v7a\\json_generation_record.json",
+  "compileCommandsJsonFile": "D:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\debug\\armeabi-v7a\\compile_commands.json"
+}

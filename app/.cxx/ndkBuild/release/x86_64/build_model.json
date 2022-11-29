@@ -1,0 +1,60 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "E:\\pro_AndroidStudio\\getTamperSwitch",
+      "sdkFolder": "E:\\AndroidStudioSDK",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app",
+      "makeFile": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\src\\main\\tamperBtnStatus\\Android.mk",
+      "buildSystem": "NDK_BUILD",
+      "compilerSettingsCacheFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\.cxx",
+      "cxxFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx",
+      "ndkFolder": "E:\\AndroidStudioSDK\\ndk-bundle",
+      "ndkVersion": "21.0.6113669",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [],
+    "variantName": "release",
+    "soFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\release\\lib",
+    "objFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local",
+    "jsonFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\release",
+    "gradleBuildOutputFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\cxx\\release",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "X86_64",
+  "abiPlatformVersion": 16,
+  "cxxBuildFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\release\\x86_64",
+  "jsonFile": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\release\\x86_64\\android_gradle_build.json",
+  "gradleBuildOutputFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\cxx\\release\\x86_64",
+  "objFolder": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86_64",
+  "buildCommandFile": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\release\\x86_64\\build_command.txt",
+  "buildOutputFile": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\release\\x86_64\\build_output.txt",
+  "modelOutputFile": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\release\\x86_64\\build_model.json",
+  "jsonGenerationLoggingRecordFile": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\release\\x86_64\\json_generation_record.json",
+  "compileCommandsJsonFile": "E:\\pro_AndroidStudio\\getTamperSwitch\\app\\.cxx\\ndkBuild\\release\\x86_64\\compile_commands.json"
+}

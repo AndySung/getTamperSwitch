@@ -1,0 +1,2 @@
+[x86_64] Compile        : tamperBtnStatus <= tamperBtnStatus.c
+[x86_64] SharedLibrary  : libtamperBtnStatus.so
