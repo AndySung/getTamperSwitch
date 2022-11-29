@@ -32,7 +32,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:text="Current Button Back Light: 80%" />
+                android:text="Button back light: Off" />
 
             <Switch
                 android:id="@+id/btn_back_light_switch"

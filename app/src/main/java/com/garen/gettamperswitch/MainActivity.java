@@ -174,11 +174,9 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    backLightTest();
-                    //switchBackLight(false);
+                    switchBackLight(true);
                 }else {
-                    backLightTest();
-                    //switchBackLight(true);
+                    switchBackLight(false);
                 }
             }
         });
@@ -239,38 +237,6 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         }
     }
 
-    private void backLightTest() {
-        Hr40 = (IHr40MiscService)getSystemService(Context.Hr40Misc_SERVICE);
-        if(Hr40 == null){
-            Log.d(TAG, "onKeyDown: Hr40 is a null object reference.");
-        }else {
-            // 为了方便测试，当按下 HR40_POWER 时，会触发 IR 发送事件
-            try {
-                Hr40.Hr40Misc_open();
-            } catch (RemoteException ex) {}
-
-            try {
-                Hr40.Hr40Misc_isButtonBacklightOn();
-            } catch (RemoteException ex) {}
-
-            try {
-                Hr40.Hr40Misc_controlButtonBacklight(true);
-            } catch (RemoteException ex) {}
-
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ix) {}
-
-            try {
-                Hr40.Hr40Misc_controlButtonBacklight(false);
-            } catch (RemoteException ex) {}
-
-            try {
-                Hr40.Hr40Misc_close();
-            } catch (RemoteException ex) {}
-        }
-    }
-
     private void switchBackLight(boolean isOpen) {
         Hr40 = (IHr40MiscService)getSystemService(Context.Hr40Misc_SERVICE);
         if(Hr40 == null){
@@ -279,22 +245,15 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
             // 为了方便测试，当按下 HR40_POWER 时，会触发 IR 发送事件
             try {
                 Hr40.Hr40Misc_open();
-            } catch (RemoteException ex) {}
-
-            try {
-                if( Hr40.Hr40Misc_isButtonBacklightOn()) {
-                    btn_back_light_switch.setChecked(true);
+                if(Hr40.Hr40Misc_isButtonBacklightOn()) {
+                    //btn_back_light_switch.setChecked(true);
                     current_btn_back_light_text.setText("Button back light: On");
                 } else {
-                    btn_back_light_switch.setChecked(false);
+                    //btn_back_light_switch.setChecked(false);
                     current_btn_back_light_text.setText("Button back light: Off");
                 }
+                Hr40.Hr40Misc_controlButtonBacklight(isOpen);
             } catch (RemoteException ex) {}
-
-               try {
-                   Hr40.Hr40Misc_controlButtonBacklight(isOpen);
-               } catch (RemoteException ex) {}
-
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException ix) {}
