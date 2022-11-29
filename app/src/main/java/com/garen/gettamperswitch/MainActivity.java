@@ -196,43 +196,30 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
                 IR.IR_configCarrier(40 * 1000, 50);
                 Log.i(TAG, "IR_sendPrepareBuffer ...");
                 IR.IR_sendPrepareBuffer(buf_81, buf_81.length, buf_82, buf_82.length);
-            } catch (RemoteException ex) {
-            }
-            if(type.equals("sendOnce")){
-                // 发送一次 IR
-                try {
+                if(type.equals("sendOnce")) {
+                    // 发送一次 IR
                     Log.i(TAG, "IR_startSendOnce ...");
                     IR.IR_startSendOnce();
-                } catch (RemoteException ex) {
-                }
-            }else if(type.equals("sendRepeat")) {
-                // 发送多次 IR
-                try {
+                } else if(type.equals("sendRepeat")) {
+                    // 发送多次 IR
                     Log.i(TAG, "IR_startSend_repeat ...");
                     IR.IR_startSend_repeat(repeatNum);
-                } catch (RemoteException ex) {
-                }
-            }else if(type.equals("keepSending")) {
-                // 持续发送 IR
-                try {
+                } else if(type.equals("keepSending")) {
+                    // 持续发送 IR
                     Log.i(TAG, "IR_startSend ...");
                     IR.IR_startSend();
-
                     if(IR.IR_isSending() == 1) {
                         Log.i(TAG, "Sleep 1 ...");
                         TimeUnit.SECONDS.sleep(1);
                         Log.i(TAG, "IR_stopSend ...");
                         IR.IR_stopSend();
                     }
-                } catch (RemoteException ex) {
-                } catch (InterruptedException ix) {}
-
-            }
-
-            try {
+                }
                 Log.i(TAG, "IR_close ...");
                 IR.IR_close();
             } catch (RemoteException ex) {
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -245,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
             // 为了方便测试，当按下 HR40_POWER 时，会触发 IR 发送事件
             try {
                 Hr40.Hr40Misc_open();
-                if(Hr40.Hr40Misc_isButtonBacklightOn()) {
+                if(!Hr40.Hr40Misc_isButtonBacklightOn()) {
                     //btn_back_light_switch.setChecked(true);
                     current_btn_back_light_text.setText("Button back light: On");
                 } else {
