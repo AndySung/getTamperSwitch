@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
@@ -32,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity implements BatteryChangedReceiver.Message{
+    private Context mContext;
     private static final int REQUEST_CODE_WRITE_SETTINGS = 1000;
     private BatteryChangedReceiver receiver;
     static String TAG="tamperSwitch";
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     int Jni_AC_status = -1;
     int Jni_tamperBtn_status = -1;
     ImageButton battery_icon;
-    TextView current_btn_back_light_text,current_screen_btn_back_light,battery_value,battery_status,ir_test_status;
+    TextView current_btn_back_light_text,current_screen_btn_back_light,battery_value,battery_status,ir_test_status,version_code;
     SeekBar current_btn_back_light_seekbar,current_screen_btn_back_light_seekbar;
     AmountView amountview;
     Button testIR_btn, testIR_more_btn;
@@ -100,11 +103,14 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         testIR_more_btn = findViewById(R.id.testIR_more_btn);
         ir_test_status = findViewById(R.id.ir_test_status);
         btn_back_light_switch = findViewById(R.id.btn_back_light_switch);
+        version_code = findViewById(R.id.version_code);
     }
 
     private void initData() {
+        mContext = getApplicationContext();
         current_screen_btn_back_light_seekbar.setProgress((int)(getScreenBrightness(this)/2.55));
         current_screen_btn_back_light.setText("Current Screen Back Light: " + (int) Math.ceil(getScreenBrightness(this)/2.55) + "%");
+        version_code.setText("version:"+APKVersionInfoUtils.getVersionName(mContext));
     }
 
     private void setOnClickListen() {
@@ -350,70 +356,190 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     @SuppressLint("WrongConstant")
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        Log.d(TAG, "onKeyDown: .... ");
-        if( keyCode == KeyEvent.KEYCODE_F1){    // tamper Switch event
-            if(event.getAction()==KeyEvent.ACTION_DOWN) {
-             //   tamperView.setText("tamper Switch Button pressed");
-                this.status = this.tamperSwitchPressed;
-                Log.d(TAG, "onKeyDown: pressed ");
-            }
-        }
-        else if( keyCode == KeyEvent.KEYCODE_HR40_POWER ){ // AC detection event
-            if(event.getAction()==KeyEvent.ACTION_DOWN){
-         //       acDetectView.setText("AC Insert");
-                this.AC_DetectStatus = this.AC_Insert;
-                Log.d(TAG, "onKeyDown: POWER down ");
-            }
-        }
-        else if( keyCode == KeyEvent.KEYCODE_F2 ){ // AC detection event
-            if(event.getAction()==KeyEvent.ACTION_DOWN){
-           //     acDetectView.setText("AC Insert");
-                this.AC_DetectStatus = this.AC_Insert;
-                Log.d(TAG, "onKeyDown: AC Insert ");
-            }
-        }
-        else if( keyCode == KeyEvent.KEYCODE_HR40_MIC_USER_1 ){ //
-            if(event.getAction()==KeyEvent.ACTION_DOWN){
-                Log.d(TAG, "onKeyDown: KEYCODE_HR40_MIC_USER_1 Down Events.");
-            }
-        }else{
-            Log.d(TAG, "onKeyDown:  " + keyCode + " --> "+ event.toString());
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_HR40_FAVORITES:
+                ToastUtils.toastShow(mContext, "Press HR40_FAVORITES Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_USER_0:
+                ToastUtils.toastShow(mContext, "Press HR40_USER_0 Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_INFO:
+                ToastUtils.toastShow(mContext, "Press HR40_INFO Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_MIC_USER_1:
+                ToastUtils.toastShow(mContext, "Press HR40_MIC_USER_1 Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_MENU:
+                ToastUtils.toastShow(mContext, "Press HR40_MENU Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_GUIDE:
+                ToastUtils.toastShow(mContext, "Press HR40_GUIDE Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_FILTER_LIST:
+                ToastUtils.toastShow(mContext, "Press HR40_FILTER_LIST Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_EXIT:
+                ToastUtils.toastShow(mContext, "Press HR40_EXIT Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_VOL_UP:
+                ToastUtils.toastShow(mContext, "Press HR40_VOL_UP Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_VOL_DOWN:
+                ToastUtils.toastShow(mContext, "Press HR40_VOL_DOWN Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_PREV_CHANNEL:
+                ToastUtils.toastShow(mContext, "Press HR40_PREV_CHANNEL Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_NEXT_CHANNEL:
+                ToastUtils.toastShow(mContext, "Press HR40_NEXT_CHANNEL Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_UP:
+                ToastUtils.toastShow(mContext, "Press HR40_UP Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_DOWN:
+                ToastUtils.toastShow(mContext, "Press HR40_DOWN Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_LEFT:
+                ToastUtils.toastShow(mContext, "Press HR40_LEFT Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_RIGHT:
+                ToastUtils.toastShow(mContext, "Press HR40_RIGHT Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_MUTE:
+                ToastUtils.toastShow(mContext, "Press HR40_MUTE Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_PAGE_DOWN:
+                ToastUtils.toastShow(mContext, "Press HR40_PAGE_DOWN Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_PAGE_UP:
+                ToastUtils.toastShow(mContext, "Press HR40_PAGE_UP Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_GOTO_LIVE:
+                ToastUtils.toastShow(mContext, "Press HR40_GOTO_LIVE Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_SKIP_REWIND:
+                ToastUtils.toastShow(mContext, "Press HR40_SKIP_REWIND Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_PLAY:
+                ToastUtils.toastShow(mContext, "Press HR40_PLAY Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_SKIP_FORWARD:
+                ToastUtils.toastShow(mContext, "Press HR40_SKIP_FORWARD Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_ENTER:
+                ToastUtils.toastShow(mContext, "Press HR40_ENTER Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_MEDIA:
+                ToastUtils.toastShow(mContext, "Press HR40_MEDIA Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_HOME_TOPMENU:
+                ToastUtils.toastShow(mContext, "Press HR40_HOME_TOPMENU Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_NUM:
+                ToastUtils.toastShow(mContext, "Press HR40_NUM Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_POWER:
+                ToastUtils.toastShow(mContext, "Press HR40_POWER Key", 500);
+                break;
+            default:
+                Log.d(TAG, "onKeyDown:  " + keyCode + " --> "+ event.toString());
+                break;
         }
         return super.onKeyDown(keyCode, event);
     }
 
+
+
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-
-        if( keyCode == KeyEvent.KEYCODE_F1){    // tamper Switch event
-
-            if(event.getAction()==KeyEvent.ACTION_UP){
-            //    tamperView.setText("tamper Switch Button released");
-                this.status = this.tamperSwitchReleased;
-                Log.d(TAG, "onKeyDown: released ");
-            }
-        }
-        else if( keyCode == KeyEvent.KEYCODE_F2 ){ // AC detection event
-            if(event.getAction()==KeyEvent.ACTION_UP){
-            //    acDetectView.setText("AC Pull Out");
-                this.AC_DetectStatus = this.AC_PullOut;
-                Log.d(TAG, "onKeyDown: AC PullOut ");
-            }
-        }
-        else if( keyCode == KeyEvent.KEYCODE_HR40_POWER ){ // AC detection event
-            if(event.getAction()==KeyEvent.ACTION_UP){
-          //      acDetectView.setText("AC Insert");
-                this.AC_DetectStatus = this.AC_Insert;
-                Log.d(TAG, "onKeyDown: POWER Up ");
-            }
-        }
-        else if( keyCode == KeyEvent.KEYCODE_HR40_MIC_USER_1 ){
-            if(event.getAction()==KeyEvent.ACTION_UP){
-                Log.d(TAG, "onKeyUp: KEYCODE_HR40_MIC_USER_1 Up Events.");
-            }
-        }
-        else{
-            Log.d(TAG, "onKeyUp:  " + keyCode + " --> "+ event.toString());
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_HR40_FAVORITES:
+                ToastUtils.toastShow(mContext, "Release HR40_FAVORITES Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_USER_0:
+                ToastUtils.toastShow(mContext, "Release HR40_USER_0 Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_INFO:
+                ToastUtils.toastShow(mContext, "Release HR40_INFO Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_MIC_USER_1:
+                ToastUtils.toastShow(mContext, "Release HR40_MIC_USER_1 Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_MENU:
+                ToastUtils.toastShow(mContext, "Release HR40_MENU Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_GUIDE:
+                ToastUtils.toastShow(mContext, "Release HR40_GUIDE Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_FILTER_LIST:
+                ToastUtils.toastShow(mContext, "Release HR40_FILTER_LIST Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_EXIT:
+                ToastUtils.toastShow(mContext, "Release HR40_EXIT Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_VOL_UP:
+                ToastUtils.toastShow(mContext, "Release HR40_VOL_UP Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_VOL_DOWN:
+                ToastUtils.toastShow(mContext, "Release HR40_VOL_DOWN Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_PREV_CHANNEL:
+                ToastUtils.toastShow(mContext, "Release HR40_PREV_CHANNEL Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_NEXT_CHANNEL:
+                ToastUtils.toastShow(mContext, "Release HR40_NEXT_CHANNEL Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_UP:
+                ToastUtils.toastShow(mContext, "Release HR40_UP Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_DOWN:
+                ToastUtils.toastShow(mContext, "Release HR40_DOWN Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_LEFT:
+                ToastUtils.toastShow(mContext, "Release HR40_LEFT Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_RIGHT:
+                ToastUtils.toastShow(mContext, "Release HR40_RIGHT Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_MUTE:
+                ToastUtils.toastShow(mContext, "Release HR40_MUTE Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_PAGE_DOWN:
+                ToastUtils.toastShow(mContext, "Release HR40_PAGE_DOWN Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_PAGE_UP:
+                ToastUtils.toastShow(mContext, "Release HR40_PAGE_UP Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_GOTO_LIVE:
+                ToastUtils.toastShow(mContext, "Release HR40_GOTO_LIVE Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_SKIP_REWIND:
+                ToastUtils.toastShow(mContext, "Release HR40_SKIP_REWIND Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_PLAY:
+                ToastUtils.toastShow(mContext, "Release HR40_PLAY Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_SKIP_FORWARD:
+                ToastUtils.toastShow(mContext, "Release HR40_SKIP_FORWARD Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_ENTER:
+                ToastUtils.toastShow(mContext, "Release HR40_ENTER Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_MEDIA:
+                ToastUtils.toastShow(mContext, "Release HR40_MEDIA Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_HOME_TOPMENU:
+                ToastUtils.toastShow(mContext, "Release HR40_HOME_TOPMENU Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_NUM:
+                ToastUtils.toastShow(mContext, "Release HR40_NUM Key", 500);
+                break;
+            case KeyEvent.KEYCODE_HR40_POWER:
+                ToastUtils.toastShow(mContext, "Release HR40_POWER Key", 500);
+                break;
+            default:
+                Log.d(TAG, "onKeyDown:  " + keyCode + " --> "+ event.toString());
+                break;
         }
         return super.onKeyUp(keyCode, event);
     }
@@ -506,5 +632,10 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         }else{
             Toast.makeText(MainActivity.this, "当前版本为："+ Build.VERSION.SDK_INT +"版本不能低于23", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

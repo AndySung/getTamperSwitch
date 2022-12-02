@@ -1,222 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="HR40 Test APP"
-        android:id="@+id/tamperSwView"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:layout_gravity="center"/>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillViewport="true">
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HR40 Test APP"
+            android:id="@+id/tamperSwView"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <RelativeLayout android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/current_btn_back_light_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:text="Button back light: Off" />
+            <RelativeLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/current_btn_back_light_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:text="Button back light: Off" />
 
-            <Switch
-                android:id="@+id/btn_back_light_switch"
-                android:layout_width="wrap_content"
+                <Switch
+                    android:id="@+id/btn_back_light_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <SeekBar
+                android:id="@+id/current_btn_back_light_seekbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
-                android:layout_centerInParent="true" />
-        </RelativeLayout>
-        <SeekBar
-            android:id="@+id/current_btn_back_light_seekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:maxHeight="5.0dp"
-            android:minHeight="5.0dp"
-            android:max="100"
-            android:progressDrawable="@drawable/sb_bar"
-            android:thumb="@drawable/sb_thumb" />
-    </LinearLayout>
-    <TextView android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/gray_8c"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/current_screen_btn_back_light"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:maxHeight="5.0dp"
+                android:minHeight="5.0dp"
+                android:max="100"
+                android:progressDrawable="@drawable/sb_bar"
+                android:thumb="@drawable/sb_thumb" />
+        </LinearLayout>
+        <TextView android:layout_width="match_parent"
+            android:layout_height="0.1dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Current Screen Back Light: 80%" />
-
-        <SeekBar
-            android:id="@+id/current_screen_btn_back_light_seekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:maxHeight="5.0dp"
-            android:minHeight="5.0dp"
-            android:progressDrawable="@drawable/sb_bar"
-            android:thumb="@drawable/sb_thumb"/>
-    </LinearLayout>
-
-    <TextView android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/gray_8c"/>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp">
-
-        <ImageButton
-            android:id="@+id/battery_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@color/transparent"
-            android:src="@mipmap/battery_75"/>
-
-        <TextView
-            android:id="@+id/battery_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/battery_icon"
-            android:layout_centerVertical="true"
-            android:text="Current Battery: 80%" />
-
-        <TextView
-            android:id="@+id/battery_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="14sp"
-            android:text="charing"/>
-    </RelativeLayout>
-
-    <TextView android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/gray_8c"/>
-
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+            android:layout_marginRight="10dp"
+            android:background="@color/gray_8c"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ir_test_status"
+                android:id="@+id/current_screen_btn_back_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="IR send once" />
+                android:text="Current Screen Back Light: 80%" />
+
+            <SeekBar
+                android:id="@+id/current_screen_btn_back_light_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:maxHeight="5.0dp"
+                android:minHeight="5.0dp"
+                android:progressDrawable="@drawable/sb_bar"
+                android:thumb="@drawable/sb_thumb"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray_8c"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
+
+            <ImageButton
+                android:id="@+id/battery_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@color/transparent"
+                android:src="@mipmap/battery_75"/>
+
+            <TextView
+                android:id="@+id/battery_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/battery_icon"
+                android:layout_centerVertical="true"
+                android:text="Current Battery: 80%" />
+
+            <TextView
+                android:id="@+id/battery_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="14sp"
+                android:text="charing"/>
+        </RelativeLayout>
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray_8c"/>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical">
+                android:orientation="vertical">
 
-                <com.garen.gettamperswitch.AmountView
-                    android:id="@+id/amountview"
-                    android:layout_width="90dp"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
+                <TextView
+                    android:id="@+id/ir_test_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    app:currentValue="1"
-                    app:maxValue="100"
-                    app:minValue="1"
-                    app:textSize="6sp" />
+                    android:layout_marginTop="10dp"
+                    android:text="IR send once" />
 
-                <Button
-                    android:id="@+id/testIR_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/btn_content_normal"
-                    android:textColor="@color/blue"
-                    android:text="testIR_Once"
-                    android:textSize="10sp" />
-                <Button
-                    android:id="@+id/testIR_more_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/btn_content_normal"
-                    android:text="testIR_Keep"
-                    android:textColor="@color/blue"
-                    android:textSize="10sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical">
+
+                    <com.garen.gettamperswitch.AmountView
+                        android:id="@+id/amountview"
+                        android:layout_width="90dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        app:currentValue="1"
+                        app:maxValue="100"
+                        app:minValue="1"
+                        app:textSize="6sp" />
+
+                    <Button
+                        android:id="@+id/testIR_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/btn_content_normal"
+                        android:textColor="@color/blue"
+                        android:text="testIR_Once"
+                        android:textSize="10sp" />
+                    <Button
+                        android:id="@+id/testIR_more_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/btn_content_normal"
+                        android:text="testIR_Keep"
+                        android:textColor="@color/blue"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
             </LinearLayout>
+
 
         </LinearLayout>
 
 
+        <TextView android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray_8c"/>
+
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+            android:gravity="center"
+        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/version_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="version: 1.0"
+                android:textSize="8sp"
+                android:textColor="@color/gray_8c"
+                android:layout_gravity="center|bottom"/>
+        </LinearLayout>
+
     </LinearLayout>
-
-
-    <TextView android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/gray_8c"/>
-
-    <TextView
-        android:id="@+id/acDetectView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AC detect!"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_gravity="center"/>
-</LinearLayout>
 </ScrollView>
