@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
@@ -30,6 +28,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.garen.gettamperswitch.ota.OtaHr40;
+import com.garen.gettamperswitch.ota.TcpClient;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -37,13 +38,13 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     private Context mContext;
     private static final int REQUEST_CODE_WRITE_SETTINGS = 1000;
     private BatteryChangedReceiver receiver;
-    static String TAG="tamperSwitch";
     static int tamperSwitchPressed = 0;
     static int tamperSwitchReleased = 1;
     static int tamperSwitchInit = -1;
     int status = tamperSwitchInit;
     private static IIRService IR = null;
     private static IHr40MiscService Hr40 = null;
+    private static String TAG = "garen--->getTamperSwitch-->:";
 
     private static int[] buf_81={0x56,0x01,0xAB,0x00};
     private static int[] buf_82={
@@ -70,10 +71,10 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     int Jni_AC_status = -1;
     int Jni_tamperBtn_status = -1;
     ImageButton battery_icon;
-    TextView current_btn_back_light_text,current_screen_btn_back_light,battery_value,battery_status,ir_test_status,version_code;
+    TextView current_btn_back_light_text,current_screen_btn_back_light,battery_value,battery_status,ir_test_status,version_code,ip_address_edit,port_edit;
     SeekBar current_btn_back_light_seekbar,current_screen_btn_back_light_seekbar;
     AmountView amountview;
-    Button testIR_btn, testIR_more_btn;
+    Button testIR_btn, testIR_more_btn, ota_btn;
     Switch btn_back_light_switch;
     LocationManager locationManager;
 
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         ir_test_status = findViewById(R.id.ir_test_status);
         btn_back_light_switch = findViewById(R.id.btn_back_light_switch);
         version_code = findViewById(R.id.version_code);
+        ip_address_edit = findViewById(R.id.ip_address_edit);
+        port_edit = findViewById(R.id.port_edit);
+        ota_btn = findViewById(R.id.ota_btn);
     }
 
     private void initData() {
@@ -184,6 +188,16 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
                 }else {
                     switchBackLight(false);
                 }
+            }
+        });
+        ota_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                OtaHr40 ota = new OtaHr40(context);
+
+                TcpClient tcpClient = new TcpClient(ota,ip_address_edit.getText().toString(), Integer.parseInt(port_edit.getText().toString()));
+                new Thread(tcpClient).start();
             }
         });
     }
@@ -359,87 +373,115 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         switch (keyCode) {
             case KeyEvent.KEYCODE_HR40_FAVORITES:
                 ToastUtils.toastShow(mContext, "Press HR40_FAVORITES Key", 500);
+                Log.i(TAG, "Press HR40_FAVORITES Key");
                 break;
             case KeyEvent.KEYCODE_HR40_USER_0:
                 ToastUtils.toastShow(mContext, "Press HR40_USER_0 Key", 500);
+                Log.i(TAG, "Press HR40_USER_0 Key");
                 break;
             case KeyEvent.KEYCODE_HR40_INFO:
                 ToastUtils.toastShow(mContext, "Press HR40_INFO Key", 500);
+                Log.i(TAG, "Press HR40_INFO Key");
                 break;
             case KeyEvent.KEYCODE_HR40_MIC_USER_1:
                 ToastUtils.toastShow(mContext, "Press HR40_MIC_USER_1 Key", 500);
+                Log.i(TAG, "Press HR40_MIC_USER_1 Key");
                 break;
             case KeyEvent.KEYCODE_HR40_MENU:
                 ToastUtils.toastShow(mContext, "Press HR40_MENU Key", 500);
+                Log.i(TAG, "Press HR40_MENU Key");
                 break;
             case KeyEvent.KEYCODE_HR40_GUIDE:
                 ToastUtils.toastShow(mContext, "Press HR40_GUIDE Key", 500);
+                Log.i(TAG, "Press HR40_GUIDE Key");
                 break;
             case KeyEvent.KEYCODE_HR40_FILTER_LIST:
                 ToastUtils.toastShow(mContext, "Press HR40_FILTER_LIST Key", 500);
+                Log.i(TAG, "Press HR40_FILTER_LIST Key");
                 break;
             case KeyEvent.KEYCODE_HR40_EXIT:
                 ToastUtils.toastShow(mContext, "Press HR40_EXIT Key", 500);
+                Log.i(TAG, "Press HR40_EXIT Key");
                 break;
             case KeyEvent.KEYCODE_HR40_VOL_UP:
                 ToastUtils.toastShow(mContext, "Press HR40_VOL_UP Key", 500);
+                Log.i(TAG, "Press HR40_VOL_UP Key");
                 break;
             case KeyEvent.KEYCODE_HR40_VOL_DOWN:
                 ToastUtils.toastShow(mContext, "Press HR40_VOL_DOWN Key", 500);
+                Log.i(TAG, "Press HR40_VOL_DOWN Key");
                 break;
             case KeyEvent.KEYCODE_HR40_PREV_CHANNEL:
                 ToastUtils.toastShow(mContext, "Press HR40_PREV_CHANNEL Key", 500);
+                Log.i(TAG, "Press HR40_PREV_CHANNEL Key");
                 break;
             case KeyEvent.KEYCODE_HR40_NEXT_CHANNEL:
                 ToastUtils.toastShow(mContext, "Press HR40_NEXT_CHANNEL Key", 500);
+                Log.i(TAG, "Press HR40_NEXT_CHANNEL Key");
                 break;
             case KeyEvent.KEYCODE_HR40_UP:
                 ToastUtils.toastShow(mContext, "Press HR40_UP Key", 500);
+                Log.i(TAG, "Press HR40_UP Key");
                 break;
             case KeyEvent.KEYCODE_HR40_DOWN:
                 ToastUtils.toastShow(mContext, "Press HR40_DOWN Key", 500);
+                Log.i(TAG, "Press HR40_DOWN Key");
                 break;
             case KeyEvent.KEYCODE_HR40_LEFT:
                 ToastUtils.toastShow(mContext, "Press HR40_LEFT Key", 500);
+                Log.i(TAG, "Press HR40_LEFT Key");
                 break;
             case KeyEvent.KEYCODE_HR40_RIGHT:
                 ToastUtils.toastShow(mContext, "Press HR40_RIGHT Key", 500);
+                Log.i(TAG, "Press HR40_RIGHT Key");
                 break;
             case KeyEvent.KEYCODE_HR40_MUTE:
                 ToastUtils.toastShow(mContext, "Press HR40_MUTE Key", 500);
+                Log.i(TAG, "Press HR40_MUTE Key");
                 break;
             case KeyEvent.KEYCODE_HR40_PAGE_DOWN:
                 ToastUtils.toastShow(mContext, "Press HR40_PAGE_DOWN Key", 500);
+                Log.i(TAG, "Press HR40_PAGE_DOWN Key");
                 break;
             case KeyEvent.KEYCODE_HR40_PAGE_UP:
                 ToastUtils.toastShow(mContext, "Press HR40_PAGE_UP Key", 500);
+                Log.i(TAG, "Press HR40_PAGE_UP Key");
                 break;
             case KeyEvent.KEYCODE_HR40_GOTO_LIVE:
                 ToastUtils.toastShow(mContext, "Press HR40_GOTO_LIVE Key", 500);
+                Log.i(TAG, "Press HR40_GOTO_LIVE Key");
                 break;
             case KeyEvent.KEYCODE_HR40_SKIP_REWIND:
                 ToastUtils.toastShow(mContext, "Press HR40_SKIP_REWIND Key", 500);
+                Log.i(TAG, "Press HR40_SKIP_REWIND Key");
                 break;
             case KeyEvent.KEYCODE_HR40_PLAY:
                 ToastUtils.toastShow(mContext, "Press HR40_PLAY Key", 500);
+                Log.i(TAG, "Press HR40_PLAY Key");
                 break;
             case KeyEvent.KEYCODE_HR40_SKIP_FORWARD:
                 ToastUtils.toastShow(mContext, "Press HR40_SKIP_FORWARD Key", 500);
+                Log.i(TAG, "Press HR40_SKIP_FORWARD Key");
                 break;
             case KeyEvent.KEYCODE_HR40_ENTER:
                 ToastUtils.toastShow(mContext, "Press HR40_ENTER Key", 500);
+                Log.i(TAG, "Press HR40_ENTER Key");
                 break;
             case KeyEvent.KEYCODE_HR40_MEDIA:
                 ToastUtils.toastShow(mContext, "Press HR40_MEDIA Key", 500);
+                Log.i(TAG, "Press HR40_MEDIA Key");
                 break;
             case KeyEvent.KEYCODE_HR40_HOME_TOPMENU:
                 ToastUtils.toastShow(mContext, "Press HR40_HOME_TOPMENU Key", 500);
+                Log.i(TAG, "Press HR40_HOME_TOPMENU Key");
                 break;
             case KeyEvent.KEYCODE_HR40_NUM:
                 ToastUtils.toastShow(mContext, "Press HR40_NUM Key", 500);
+                Log.i(TAG, "Press HR40_NUM Key");
                 break;
             case KeyEvent.KEYCODE_HR40_POWER:
                 ToastUtils.toastShow(mContext, "Press HR40_POWER Key", 500);
+                Log.i(TAG, "Press HR40_POWER Key");
                 break;
             default:
                 Log.d(TAG, "onKeyDown:  " + keyCode + " --> "+ event.toString());
@@ -455,87 +497,115 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         switch (keyCode) {
             case KeyEvent.KEYCODE_HR40_FAVORITES:
                 ToastUtils.toastShow(mContext, "Release HR40_FAVORITES Key", 500);
+                Log.i(TAG, "Release HR40_FAVORITES Key");
                 break;
             case KeyEvent.KEYCODE_HR40_USER_0:
                 ToastUtils.toastShow(mContext, "Release HR40_USER_0 Key", 500);
+                Log.i(TAG, "Release HR40_USER_0 Key");
                 break;
             case KeyEvent.KEYCODE_HR40_INFO:
                 ToastUtils.toastShow(mContext, "Release HR40_INFO Key", 500);
+                Log.i(TAG, "Release HR40_INFO Key");
                 break;
             case KeyEvent.KEYCODE_HR40_MIC_USER_1:
                 ToastUtils.toastShow(mContext, "Release HR40_MIC_USER_1 Key", 500);
+                Log.i(TAG, "Release HR40_MIC_USER_1 Key");
                 break;
             case KeyEvent.KEYCODE_HR40_MENU:
                 ToastUtils.toastShow(mContext, "Release HR40_MENU Key", 500);
+                Log.i(TAG, "Release HR40_MENU Key");
                 break;
             case KeyEvent.KEYCODE_HR40_GUIDE:
                 ToastUtils.toastShow(mContext, "Release HR40_GUIDE Key", 500);
+                Log.i(TAG, "Release HR40_GUIDE Key");
                 break;
             case KeyEvent.KEYCODE_HR40_FILTER_LIST:
                 ToastUtils.toastShow(mContext, "Release HR40_FILTER_LIST Key", 500);
+                Log.i(TAG, "Release HR40_FILTER_LIST Key");
                 break;
             case KeyEvent.KEYCODE_HR40_EXIT:
                 ToastUtils.toastShow(mContext, "Release HR40_EXIT Key", 500);
+                Log.i(TAG, "Release HR40_EXIT Key");
                 break;
             case KeyEvent.KEYCODE_HR40_VOL_UP:
                 ToastUtils.toastShow(mContext, "Release HR40_VOL_UP Key", 500);
+                Log.i(TAG, "Release HR40_VOL_UP Key");
                 break;
             case KeyEvent.KEYCODE_HR40_VOL_DOWN:
                 ToastUtils.toastShow(mContext, "Release HR40_VOL_DOWN Key", 500);
+                Log.i(TAG, "Release HR40_VOL_DOWN Key");
                 break;
             case KeyEvent.KEYCODE_HR40_PREV_CHANNEL:
                 ToastUtils.toastShow(mContext, "Release HR40_PREV_CHANNEL Key", 500);
+                Log.i(TAG, "Release HR40_PREV_CHANNEL Key");
                 break;
             case KeyEvent.KEYCODE_HR40_NEXT_CHANNEL:
                 ToastUtils.toastShow(mContext, "Release HR40_NEXT_CHANNEL Key", 500);
+                Log.i(TAG, "Release HR40_NEXT_CHANNEL Key");
                 break;
             case KeyEvent.KEYCODE_HR40_UP:
                 ToastUtils.toastShow(mContext, "Release HR40_UP Key", 500);
+                Log.i(TAG, "Release HR40_UP Key");
                 break;
             case KeyEvent.KEYCODE_HR40_DOWN:
                 ToastUtils.toastShow(mContext, "Release HR40_DOWN Key", 500);
+                Log.i(TAG, "Release HR40_DOWN Key");
                 break;
             case KeyEvent.KEYCODE_HR40_LEFT:
                 ToastUtils.toastShow(mContext, "Release HR40_LEFT Key", 500);
+                Log.i(TAG, "Release HR40_LEFT Key");
                 break;
             case KeyEvent.KEYCODE_HR40_RIGHT:
                 ToastUtils.toastShow(mContext, "Release HR40_RIGHT Key", 500);
+                Log.i(TAG, "Release HR40_RIGHT Key");
                 break;
             case KeyEvent.KEYCODE_HR40_MUTE:
                 ToastUtils.toastShow(mContext, "Release HR40_MUTE Key", 500);
+                Log.i(TAG, "Release HR40_MUTE Key");
                 break;
             case KeyEvent.KEYCODE_HR40_PAGE_DOWN:
                 ToastUtils.toastShow(mContext, "Release HR40_PAGE_DOWN Key", 500);
+                Log.i(TAG, "Release HR40_PAGE_DOWN Key");
                 break;
             case KeyEvent.KEYCODE_HR40_PAGE_UP:
                 ToastUtils.toastShow(mContext, "Release HR40_PAGE_UP Key", 500);
+                Log.i(TAG, "Release HR40_PAGE_UP Key");
                 break;
             case KeyEvent.KEYCODE_HR40_GOTO_LIVE:
                 ToastUtils.toastShow(mContext, "Release HR40_GOTO_LIVE Key", 500);
+                Log.i(TAG, "Release HR40_GOTO_LIVE Key");
                 break;
             case KeyEvent.KEYCODE_HR40_SKIP_REWIND:
                 ToastUtils.toastShow(mContext, "Release HR40_SKIP_REWIND Key", 500);
+                Log.i(TAG, "Release HR40_SKIP_REWIND Key");
                 break;
             case KeyEvent.KEYCODE_HR40_PLAY:
                 ToastUtils.toastShow(mContext, "Release HR40_PLAY Key", 500);
+                Log.i(TAG, "Release HR40_PLAY Key");
                 break;
             case KeyEvent.KEYCODE_HR40_SKIP_FORWARD:
                 ToastUtils.toastShow(mContext, "Release HR40_SKIP_FORWARD Key", 500);
+                Log.i(TAG, "Release HR40_SKIP_FORWARD Key");
                 break;
             case KeyEvent.KEYCODE_HR40_ENTER:
                 ToastUtils.toastShow(mContext, "Release HR40_ENTER Key", 500);
+                Log.i(TAG, "Release HR40_ENTER Key");
                 break;
             case KeyEvent.KEYCODE_HR40_MEDIA:
                 ToastUtils.toastShow(mContext, "Release HR40_MEDIA Key", 500);
+                Log.i(TAG, "Release HR40_MEDIA Key");
                 break;
             case KeyEvent.KEYCODE_HR40_HOME_TOPMENU:
                 ToastUtils.toastShow(mContext, "Release HR40_HOME_TOPMENU Key", 500);
+                Log.i(TAG, "Release HR40_HOME_TOPMENU Key");
                 break;
             case KeyEvent.KEYCODE_HR40_NUM:
                 ToastUtils.toastShow(mContext, "Release HR40_NUM Key", 500);
+                Log.i(TAG, "Release HR40_NUM Key");
                 break;
             case KeyEvent.KEYCODE_HR40_POWER:
                 ToastUtils.toastShow(mContext, "Release HR40_POWER Key", 500);
+                Log.i(TAG, "Release HR40_POWER Key");
                 break;
             default:
                 Log.d(TAG, "onKeyDown:  " + keyCode + " --> "+ event.toString());

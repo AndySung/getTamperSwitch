@@ -39,9 +39,10 @@
                     android:id="@+id/btn_back_light_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    tools:ignore="TouchTargetSizeCheck" />
             </RelativeLayout>
             <SeekBar
                 android:id="@+id/current_btn_back_light_seekbar"
@@ -110,7 +111,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:background="@color/transparent"
-                android:src="@mipmap/battery_75"/>
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:src="@mipmap/battery_75"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/battery_value"
@@ -179,28 +183,74 @@
                     <Button
                         android:id="@+id/testIR_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="48dp"
                         android:layout_weight="1"
                         android:layout_marginLeft="20dp"
-                        android:background="@drawable/btn_content_normal"
-                        android:textColor="@color/blue"
+                        android:background="@drawable/btn_press_style"
+                        android:textColor="@drawable/btnselectorcolor"
                         android:text="testIR_Once"
                         android:textSize="10sp" />
                     <Button
                         android:id="@+id/testIR_more_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="48dp"
                         android:layout_weight="1"
                         android:layout_margin="10dp"
-                        android:background="@drawable/btn_content_normal"
+                        android:background="@drawable/btn_press_style"
                         android:text="testIR_Keep"
-                        android:textColor="@color/blue"
+                        android:textColor="@drawable/btnselectorcolor"
                         android:textSize="10sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
 
+        </LinearLayout>
+        <TextView android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray_8c"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/ip_address_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:hint="ip address"
+                android:inputType="phone|number"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="-10dp"
+                android:text="192.168.1.100" />
+
+            <EditText
+                android:id="@+id/port_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="phone|number"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="-10dp"
+                android:hint="port"
+                android:text="6969"
+                android:textSize="14sp" />
+            <Button
+                android:id="@+id/ota_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/btn_press_style"
+                android:text="OTA"
+                android:textColor="@drawable/btnselectorcolor"
+                android:textSize="14sp" />
         </LinearLayout>
 
 
