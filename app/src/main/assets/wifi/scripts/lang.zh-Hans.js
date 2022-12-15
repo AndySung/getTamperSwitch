@@ -1,0 +1,70 @@
+var STRINGS = {};
+
+STRINGS.WIFI_TRANS_TITLE = 'OTA FILE UPLOAD';
+STRINGS.FILES_ON_DEVICE = 'List of files on your device';
+STRINGS.FILENAME = 'File name';
+STRINGS.FILE_SIZE = 'Size';
+STRINGS.FILE_OPER = 'Operate';
+STRINGS.CONFIRM_DELETE_BOOK = 'Do you want to delete the file?';
+STRINGS.DOWNLOAD_FILE = 'Download file';
+STRINGS.DELETE_FILE = 'Delete Files';
+STRINGS.USE_ONE_BROWSER = 'Unable to upload file, please do not use multiple browser windows to upload at the same time.';
+STRINGS.UPLOAD_FAILED = 'The upload failed, please reopen the WiFi transfer service and refresh this page to upload again.';
+STRINGS.UNSUPPORTED_FILE_TYPE = 'Please select the OTA upgrade file.';
+STRINGS.FILE_IN_QUEUE = 'The file is already queued for upload.';
+STRINGS.FILE_EXISTS = 'The file already exists, please delete it and upload it again.';
+STRINGS.YOU_CHOOSE = 'You selected';
+STRINGS.CHOSEN_FILE_COUNT = 'files, only upload';
+STRINGS.VALID_CHOSEN_FILE_COUNT = 'files。\nPlease choose OTA upgrade file, and the file name cannot be repeated.';
+STRINGS.CANCEL = 'Cancel';
+STRINGS.SELECT_YOUR_FILES = 'Please select the file you want to upload';
+STRINGS.SUPPORTED_FILE_TYPES = 'Supports OTA zip file';
+STRINGS.CANNOT_CONNECT_SERVER = 'Unable to connect to the WiFi book server, please reopen the WiFi book service and refresh this page to upload again.';
+STRINGS.DRAG_TO_HERE = "Drag and drop here to upload";
+STRINGS.SELECT_BUTTON_LABLE1 = "Select the file";
+STRINGS.SELECT_BUTTON_LABLE2 = "Multiple files can be uploaded at the same time";
+STRINGS.SELECT_BUTTON_LABLE = "Select the file";
+STRINGS.WIFI_AVAILABLE = "WiFi connection enabled";
+
+STRINGS.FONT_WIFI_TRANS_TITLE = 'WiFi transfer fonts';
+STRINGS.FONT_CONFIRM_DELETE_BOOK = 'Do you want to delete fonts?';
+STRINGS.FONT_UNSUPPORTED_FILE_TYPE = 'Please select the TTF or OTF font file you want to upload.';
+STRINGS.FONT_SUPPORTED_FILE_TYPES = 'Support TTF and OTF';
+STRINGS.FONT_VALID_CHOSEN_FILE_COUNT = 'files。\nPlease select a TTF or OTF file, and the file name cannot be repeated.';
+STRINGS.FONT_FILE_EXISTS = 'File already exists.';
+
+
+//var STRINGS = {};
+//
+//STRINGS.WIFI_TRANS_TITLE = 'WiFi 文件传输';
+//STRINGS.FILES_ON_DEVICE = '您设备上的文件列表';
+//STRINGS.FILENAME = '文件名';
+//STRINGS.FILE_SIZE = '大小';
+//STRINGS.FILE_OPER = '操作';
+//STRINGS.CONFIRM_DELETE_BOOK = '是否删除APK？';
+//STRINGS.DOWNLOAD_FILE = '下载文件';
+//STRINGS.DELETE_FILE = '删除文件';
+//STRINGS.USE_ONE_BROWSER = '无法上传文件，请勿使用多个浏览器窗口同时上传。';
+//STRINGS.UPLOAD_FAILED = '上传失败，请重新打开WiFi APP安装服务并刷新此页重新上传。';
+//STRINGS.UNSUPPORTED_FILE_TYPE = '请选择APK文件。';
+//STRINGS.FILE_IN_QUEUE = '文件已经在上传列队中。';
+//STRINGS.FILE_EXISTS = '文件已存在，请先删除再重新上传。';
+//STRINGS.YOU_CHOOSE = '您选择了';
+//STRINGS.CHOSEN_FILE_COUNT = '个文件，只能上传';
+//STRINGS.VALID_CHOSEN_FILE_COUNT = '个文件。\n请选择APK文件，文件名不能重复。';
+//STRINGS.CANCEL = '取消';
+//STRINGS.SELECT_YOUR_FILES = '请选择您要上传到WIFI APP安装的文件';
+////STRINGS.SUPPORTED_FILE_TYPES = '支持APK';
+//STRINGS.CANNOT_CONNECT_SERVER = '无法连接WiFi传书服务器，请重新打开WiFi 文件传输服务并刷新此页后重新上传。';
+//STRINGS.DRAG_TO_HERE = "拖拽到此处上传";
+//STRINGS.SELECT_BUTTON_LABLE1 = "选择文件";
+//STRINGS.SELECT_BUTTON_LABLE2 = "可同时上传多个文件";
+//STRINGS.SELECT_BUTTON_LABLE = "选择文件";
+//STRINGS.WIFI_AVAILABLE = "WiFi连接已启用";
+//
+//STRINGS.FONT_WIFI_TRANS_TITLE = 'WiFi 传字体';
+//STRINGS.FONT_CONFIRM_DELETE_BOOK = '是否删除字体？';
+//STRINGS.FONT_UNSUPPORTED_FILE_TYPE = '请选择您要上传的TTF或OTF字体文件。';
+//STRINGS.FONT_SUPPORTED_FILE_TYPES = '支持TTF和OTF';
+//STRINGS.FONT_VALID_CHOSEN_FILE_COUNT = '个文件。\n请选择TTF或OTF文件，文件名不能重复。';
+//STRINGS.FONT_FILE_EXISTS = '文件已存在。';

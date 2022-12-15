@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">getTamperSwitch</string>
+    <string name="ota_file_address">http://song0123.com/AndySong/HR40-OTA-v10.20221212_to_v11.20221212_no_block.zip</string>
+    <string name="wlan_enabled">Wi-Fi service is on</string>
+    <string name="wlan_disabled">Wi-Fi service is not turned on</string>
+    <string name="pls_check_network_state">lease check your network settings</string>
+    <string name="fail_to_start_http_service">Failed to start HTTP service</string>
+    <string name="retrofit_wlan_address">Getting address...</string>
+    <string name="pls_input_the_following_address_in_pc_browser">Completely enter in the browser address bar</string>
+    <string name="cancel">Cancel</string>
+    <string name="set_network">Set network</string>
+    <string name="http_address">http://%1$s:%2$d</string>
+    <string name="ota_transfer">OTATransfer</string>
 </resources>

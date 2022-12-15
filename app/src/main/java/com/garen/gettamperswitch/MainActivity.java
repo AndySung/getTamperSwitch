@@ -1,15 +1,20 @@
 package com.garen.gettamperswitch;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.IHr40MiscService;
 import android.os.IIRService;
 import android.os.RemoteException;
@@ -27,14 +32,34 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.garen.gettamperswitch.ota.DownloadService;
 import com.garen.gettamperswitch.ota.OtaHr40;
-import com.garen.gettamperswitch.ota.TcpClient;
+import com.garen.gettamperswitch.ota.lan.OTAFIleActivity;
 
 import java.util.concurrent.TimeUnit;
 
+import me.leefeng.promptlibrary.PromptDialog;
+
 
 public class MainActivity extends AppCompatActivity implements BatteryChangedReceiver.Message{
+    public DownloadService.DownloadBinder downloadBinder;
+    public static String HR40_OTA_PACKET_DIR = "/data/media/0/Download/";
+    public static String HR40_OTA_PACKET_NAME = "HR40-OTA-v9.20221201_to_v9.20221202_no_block.zip";
+
+    public ServiceConnection connection=new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            downloadBinder=(DownloadService.DownloadBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
     private Context mContext;
     private static final int REQUEST_CODE_WRITE_SETTINGS = 1000;
     private BatteryChangedReceiver receiver;
@@ -71,12 +96,16 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     int Jni_AC_status = -1;
     int Jni_tamperBtn_status = -1;
     ImageButton battery_icon;
-    TextView current_btn_back_light_text,current_screen_btn_back_light,battery_value,battery_status,ir_test_status,version_code,ip_address_edit,port_edit;
-    SeekBar current_btn_back_light_seekbar,current_screen_btn_back_light_seekbar;
+    TextView current_btn_back_light_text,current_screen_btn_back_light,battery_value,battery_status,ir_test_status,version_code,ota_file_address;
+    //TextView ip_address_edit,port_edit;
+    SeekBar current_btn_back_light_seekbar,current_screen_btn_back_light_seekbar,ota_seekbar;
     AmountView amountview;
-    Button testIR_btn, testIR_more_btn, ota_btn;
+    Button testIR_btn, testIR_more_btn, ota_btn, ota_btn_lan;
     Switch btn_back_light_switch;
     LocationManager locationManager;
+    BroadcastReceiver mReceiver;
+    PromptDialog dialog;
+
 
     static {    // 静态代码块, 构造一个对象之前被执行，且只会执行一次
        // System.loadLibrary("acStatus"); // load libacStatus.so
@@ -105,9 +134,11 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         ir_test_status = findViewById(R.id.ir_test_status);
         btn_back_light_switch = findViewById(R.id.btn_back_light_switch);
         version_code = findViewById(R.id.version_code);
-        ip_address_edit = findViewById(R.id.ip_address_edit);
-        port_edit = findViewById(R.id.port_edit);
+        //ip_address_edit = findViewById(R.id.ip_address_edit);
+        //port_edit = findViewById(R.id.port_edit);
         ota_btn = findViewById(R.id.ota_btn);
+        ota_file_address = findViewById(R.id.ota_file_address);
+        ota_btn_lan = findViewById(R.id.ota_btn_lan);
     }
 
     private void initData() {
@@ -115,6 +146,15 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         current_screen_btn_back_light_seekbar.setProgress((int)(getScreenBrightness(this)/2.55));
         current_screen_btn_back_light.setText("Current Screen Back Light: " + (int) Math.ceil(getScreenBrightness(this)/2.55) + "%");
         version_code.setText("version:"+APKVersionInfoUtils.getVersionName(mContext));
+        dialog = new PromptDialog(MainActivity.this);
+    }
+
+    private void initBroadCast() {
+        mReceiver = new BroadcastReceiver();
+        // 动态注册广播接受者
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.soft.ota.broadcast");//要接收的广播
+        registerReceiver(mReceiver, intentFilter);//注册接收者
     }
 
     private void setOnClickListen() {
@@ -194,12 +234,48 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
             @Override
             public void onClick(View v) {
                 Context context = getApplicationContext();
-                OtaHr40 ota = new OtaHr40(context);
-
-                TcpClient tcpClient = new TcpClient(ota,ip_address_edit.getText().toString(), Integer.parseInt(port_edit.getText().toString()));
-                new Thread(tcpClient).start();
+                if(downloadBinder==null){
+                    return;
+                }
+                String url=ota_file_address.getText().toString();
+                //String url="http://song0123.com/AndySong/mnzm1.jpg";
+                downloadBinder.startDownload(url);
+                /*TcpClient tcpClient = new TcpClient(ota,ip_address_edit.getText().toString(), Integer.parseInt(port_edit.getText().toString()));
+                new Thread(tcpClient).start();*/
             }
         });
+        ota_btn_lan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OTAFIleActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private String getOtaFileName() {
+        if(ota_file_address.getText().toString().indexOf("HR40") == -1) {
+            Toast.makeText(mContext, "Please check HR40 download address", Toast.LENGTH_SHORT).show();
+        }else {
+            String [] otaFileName = ota_file_address.getText().toString().split("HR40");
+            return HR40_OTA_PACKET_DIR + "HR40" + otaFileName[1];
+        }
+        return null;
+    }
+
+    private void intService() {
+        Intent intent=new Intent(this, DownloadService.class);
+        //这一点至关重要，因为启动服务可以保证DownloadService一直在后台运行，绑定服务则可以让MaiinActivity和DownloadService
+        //进行通信，因此两个方法的调用都必不可少。
+        startService(intent);  //启动服务
+        bindService(intent,connection,BIND_AUTO_CREATE);//绑定服务
+        /**
+         *运行时权限处理：我们需要再用到权限的地方，每次都要检查是否APP已经拥有权限
+         * 下载功能，需要些SD卡的权限，我们在写入之前检查是否有WRITE_EXTERNAL_STORAGE权限,没有则申请权限
+         */
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        }
     }
 
     private void test_IR_Click(String type, int repeatNum) {
@@ -293,10 +369,10 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         allowModifySettings();
         initReceiver();
         initView();
+        intService();
         initData();
         setOnClickListen();
-
-
+        initBroadCast();
         // set button OnClick callback
         /*ac_Btn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
@@ -707,5 +783,30 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(mReceiver);
+    }
+
+    public class BroadcastReceiver extends android.content.BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String msg = intent.getStringExtra("message");
+            if (msg.equals("ota_downloading")) {
+                dialog.showLoading("Downloading OTA File...");
+            }else if (msg.equals("ota_download_success")) {
+                dialog.showLoading("OTA File Download Success");
+                OtaHr40 ota = new OtaHr40(context);
+                if(ota == null) {
+                    Toast.makeText(context, "Failed to detect ota file", Toast.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    // 升级 HR40 BSP 固件.
+                    ota.otaUpdate(getOtaFileName());
+                }
+                dialog.dismissImmediately();
+            }else if (msg.equals("ota_download_failed")) {
+                dialog.showLoading("OTA File Download Failed");
+                dialog.dismissImmediately();
+            }
+        }
     }
 }
