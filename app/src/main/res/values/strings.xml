@@ -11,4 +11,13 @@
     <string name="set_network">Set network</string>
     <string name="http_address">http://%1$s:%2$d</string>
     <string name="ota_transfer">OTATransfer</string>
+
+    <string-array name="labels">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
 </resources>

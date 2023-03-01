@@ -35,29 +35,39 @@
                     android:layout_alignParentLeft="true"
                     android:text="Button back light: Off" />
 
-                <Switch
-                    android:id="@+id/btn_back_light_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="10dp"
-                    tools:ignore="TouchTargetSizeCheck" />
+<!--                <Switch-->
+<!--                    android:id="@+id/btn_back_light_switch"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    tools:ignore="TouchTargetSizeCheck" />-->
             </RelativeLayout>
-            <SeekBar
+            <com.garen.gettamperswitch.seekbar.SignSeekBar
                 android:id="@+id/current_btn_back_light_seekbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
+                app:ssb_auto_adjust_section_mark="true"
+                app:ssb_second_track_color="@android:color/holo_green_light"
+                app:ssb_second_track_size="9dp"
+                app:ssb_show_section_mark="true"
+                app:ssb_show_section_text="true"
+                app:ssb_show_sign="false"
+                app:ssb_show_thumb_shadow="true"
+                app:ssb_show_thumb_text="false"
+                app:ssb_sides_labels="@array/labels"
+                app:ssb_text_space="3dp"
+                app:ssb_thumb_bg_alpha="0.3"
+                app:ssb_thumb_radius="5dp"
+                app:ssb_thumb_radius_on_dragging="10dp"
+                app:ssb_thumb_ratio="0.7"
+                app:ssb_thumb_text_size="16sp"
+                app:ssb_touch_to_seek="true"
+                app:ssb_track_color="@color/color_gray"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:maxHeight="5.0dp"
-                android:minHeight="5.0dp"
-                android:max="100"
-                android:progressDrawable="@drawable/sb_bar"
-                android:thumb="@drawable/sb_thumb" />
+                app:ssb_track_size="7dp" />
+
         </LinearLayout>
         <TextView android:layout_width="match_parent"
             android:layout_height="0.1dp"

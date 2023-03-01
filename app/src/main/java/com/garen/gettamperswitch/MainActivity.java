@@ -38,7 +38,9 @@ import androidx.core.content.ContextCompat;
 import com.garen.gettamperswitch.ota.DownloadService;
 import com.garen.gettamperswitch.ota.OtaHr40;
 import com.garen.gettamperswitch.ota.lan.OTAFIleActivity;
+import com.garen.gettamperswitch.seekbar.SignSeekBar;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import me.leefeng.promptlibrary.PromptDialog;
@@ -98,10 +100,11 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     ImageButton battery_icon;
     TextView current_btn_back_light_text,current_screen_btn_back_light,battery_value,battery_status,ir_test_status,version_code,ota_file_address;
     //TextView ip_address_edit,port_edit;
-    SeekBar current_btn_back_light_seekbar,current_screen_btn_back_light_seekbar,ota_seekbar;
+    SeekBar current_screen_btn_back_light_seekbar,ota_seekbar;
+    SignSeekBar current_btn_back_light_seekbar;
     AmountView amountview;
     Button testIR_btn, testIR_more_btn, ota_btn, ota_btn_lan;
-    Switch btn_back_light_switch;
+    //Switch btn_back_light_switch;
     LocationManager locationManager;
     BroadcastReceiver mReceiver;
     PromptDialog dialog;
@@ -132,18 +135,33 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         testIR_btn = findViewById(R.id.testIR_btn);
         testIR_more_btn = findViewById(R.id.testIR_more_btn);
         ir_test_status = findViewById(R.id.ir_test_status);
-        btn_back_light_switch = findViewById(R.id.btn_back_light_switch);
         version_code = findViewById(R.id.version_code);
         //ip_address_edit = findViewById(R.id.ip_address_edit);
         //port_edit = findViewById(R.id.port_edit);
         ota_btn = findViewById(R.id.ota_btn);
         ota_file_address = findViewById(R.id.ota_file_address);
         ota_btn_lan = findViewById(R.id.ota_btn_lan);
+        current_btn_back_light_seekbar.getConfigBuilder()
+                .min(0)
+                .max(4)
+                .progress(2)
+                .sectionCount(4)
+                .thumbColor(ContextCompat.getColor(MainActivity.this, R.color.color_60))
+                .sectionTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorPrimary))
+                .sectionTextSize(13)
+                .sectionTextPosition(SignSeekBar.TextPosition.BELOW_SECTION_MARK)
+                .build();
     }
 
-    private void initData() {
+    private void initData() throws RemoteException {
         mContext = getApplicationContext();
         current_screen_btn_back_light_seekbar.setProgress((int)(getScreenBrightness(this)/2.55));
+        if(getBackLightValue() != 0 ) {
+            current_btn_back_light_text.setText("Btn back light: 4/4");
+        }else {
+            current_btn_back_light_text.setText("Btn back light: 0/4");
+        }
+        current_btn_back_light_text.setText("Btn back light: "+ getBackLightValue() + "/4");
         current_screen_btn_back_light.setText("Current Screen Back Light: " + (int) Math.ceil(getScreenBrightness(this)/2.55) + "%");
         version_code.setText("version:"+APKVersionInfoUtils.getVersionName(mContext));
         dialog = new PromptDialog(MainActivity.this);
@@ -158,18 +176,26 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     }
 
     private void setOnClickListen() {
-        current_btn_back_light_seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        current_btn_back_light_seekbar.setOnProgressChangedListener(new SignSeekBar.OnProgressChangedListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //txt_cur.setText("当前进度值:" + progress + "  / 100 ");
+            public void onProgressChanged(SignSeekBar signSeekBar, int progress, float progressFloat, boolean fromUser) {
+                /*String s = String.format(Locale.CHINA, "onChanged int:%d, float:%.1f", progress, progressFloat);
+                current_btn_back_light_text.setText(s);*/
             }
+
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(mContext, "触碰SeekBar", Toast.LENGTH_SHORT).show();
+            public void getProgressOnActionUp(SignSeekBar signSeekBar, int progress, float progressFloat) {
+                /*String s = String.format(Locale.CHINA, "onActionUp int:%d, float:%.1f", progress, progressFloat);
+                current_btn_back_light_text.setText(s);*/
             }
+
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-               // Toast.makeText(mContext, "放开SeekBar", Toast.LENGTH_SHORT).show();
+            public void getProgressOnFinally(SignSeekBar signSeekBar, int progress, float progressFloat, boolean fromUser) {
+                /*String s = String.format(Locale.CHINA, "onFinally int:%d, float:%.1f", progress, progressFloat);
+                current_btn_back_light_text.setText(s + MainActivity.this.getResources().getStringArray(R.array.labels)[progress]);*/
+                Log.i("andysong--->", "you youjinlaile ");
+                current_btn_back_light_text.setText("Btn back light: " + progress + " /4");
+                ModifySettingsBackLightValue(MainActivity.this, progress);
             }
         });
 
@@ -201,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
                 }
             }
         });
+
         testIR_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,16 +247,7 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
                 test_IR_Click("keepSending", 0);
             }
         });
-        btn_back_light_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    switchBackLight(true);
-                }else {
-                    switchBackLight(false);
-                }
-            }
-        });
+
         ota_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -321,28 +339,12 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     }
 
     private void switchBackLight(boolean isOpen) {
-        Hr40 = (IHr40MiscService)getSystemService(Context.Hr40Misc_SERVICE);
-        if(Hr40 == null){
-            Log.d(TAG, "onKeyDown: Hr40 is a null object reference.");
+        if(isOpen) {
+            ModifySettingsBackLightValue(MainActivity.this, IHr40MiscService.BtnBackLightLevel_4);
+            current_btn_back_light_text.setText("Btn back light: 5/5");
         }else {
-            // 为了方便测试，当按下 HR40_POWER 时，会触发 IR 发送事件
-            try {
-                Hr40.Hr40Misc_open();
-                if(!Hr40.Hr40Misc_isButtonBacklightOn()) {
-                    //btn_back_light_switch.setChecked(true);
-                    current_btn_back_light_text.setText("Button back light: On");
-                } else {
-                    //btn_back_light_switch.setChecked(false);
-                    current_btn_back_light_text.setText("Button back light: Off");
-                }
-                Hr40.Hr40Misc_controlButtonBacklight(isOpen);
-            } catch (RemoteException ex) {}
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ix) {}
-            try {
-                Hr40.Hr40Misc_close();
-            } catch (RemoteException ex) {}
+            ModifySettingsBackLightValue(MainActivity.this, IHr40MiscService.BtnBackLightLevel_0);
+            current_btn_back_light_text.setText("Btn back light: 1/5");
         }
     }
 
@@ -370,7 +372,11 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
         initReceiver();
         initView();
         intService();
-        initData();
+        try {
+            initData();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
         setOnClickListen();
         initBroadCast();
         // set button OnClick callback
@@ -722,6 +728,42 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * 4.修改背光亮度
+     * **/
+    private void ModifySettingsBackLightValue(Context context, int birghtessValue){
+        Hr40 = (IHr40MiscService)getSystemService(Context.Hr40Misc_SERVICE);
+        if(Hr40 == null){
+            Log.d(TAG, "onKeyDown: Hr40 is a null object reference.");
+        }else {
+            try {
+                // 为了方便测试，当按下 HR40_POWER 时，会触发 IR 发送事件
+                Hr40.Hr40Misc_open();
+                Log.i("andysong---->","brightessvalue:"+birghtessValue);
+                Hr40.Hr40Misc_controlButtonBacklight(birghtessValue);
+                //  TimeUnit.SECONDS.sleep(1);
+                Hr40.Hr40Misc_close();
+                Log.i("andysong--->","close了");
+            }catch (Exception ex) {}
+        }
+    }
+
+    private int getBackLightValue() throws RemoteException {
+        Hr40 = (IHr40MiscService)getSystemService(Context.Hr40Misc_SERVICE);
+        int lightValue = 0;
+        if(Hr40 == null){
+            Log.d(TAG, "onKeyDown: Hr40 is a null object reference.");
+        }else {
+            // 为了方便测试，当按下 HR40_POWER 时，会触发 IR 发送事件
+            Hr40.Hr40Misc_open();
+            lightValue = Hr40.Hr40Misc_getButtonBacklightLevel();
+            Hr40.Hr40Misc_close();
+        }
+        return lightValue;
+    }
+
 
     /**
      * 5.修改Setting 中屏幕亮度值

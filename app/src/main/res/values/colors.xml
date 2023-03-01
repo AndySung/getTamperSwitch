@@ -7,7 +7,8 @@
     <color name="gray_8c">#8C8C8C</color>
     <color name="pass_color">#08000000</color>
     <color name="white">#ffffff</color>
+    <color name="color_gray">#B4B4B4</color>
     <color name="blue">#0090ff</color>
     <color name="colorWifiConnected">#6495ED</color>
-
+    <color name="color_60">#F4A460</color>
 </resources>
