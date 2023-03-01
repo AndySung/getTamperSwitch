@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.garen.gettamperswitch.R;
+import com.garen.gettamperswitch.ToastUtils;
 import com.garen.gettamperswitch.ota.OtaHr40;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
@@ -108,8 +109,13 @@ public class OTAFIleActivity  extends AppCompatActivity implements Animator.Anim
         final PromptButton confirm = new PromptButton("Sure", new PromptButtonListener() {
             @Override
             public void onClick(PromptButton button) {
-                // 升级 HR40 BSP 固件.
-                ota.otaUpdate(Constants.DIR_ROOT + mBooks.get(position));
+                if(mBooks.get(position).contains("HR40-OTA")) {
+                    // 升级 HR40 BSP 固件.
+                    ota.otaUpdate(Constants.DIR_ROOT + mBooks.get(position));
+                }else {
+                    ToastUtils.toastShow(OTAFIleActivity.this, "Please check if the OTA file is correct", 1500);
+                    return;
+                }
             }
         });
         confirm.setTextColor(Color.parseColor("#DAA520"));
