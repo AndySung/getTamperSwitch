@@ -156,12 +156,9 @@ public class MainActivity extends AppCompatActivity implements BatteryChangedRec
     private void initData() throws RemoteException {
         mContext = getApplicationContext();
         current_screen_btn_back_light_seekbar.setProgress((int)(getScreenBrightness(this)/2.55));
-        if(getBackLightValue() != 0 ) {
-            current_btn_back_light_text.setText("Btn back light: 4/4");
-        }else {
-            current_btn_back_light_text.setText("Btn back light: 0/4");
-        }
-        current_btn_back_light_text.setText("Btn back light: "+ getBackLightValue() + "/4");
+        int getBackLightValue = getBackLightValue();
+        current_btn_back_light_seekbar.setProgress(getBackLightValue);
+        current_btn_back_light_text.setText("Btn back light: "+ getBackLightValue + "/4");
         current_screen_btn_back_light.setText("Current Screen Back Light: " + (int) Math.ceil(getScreenBrightness(this)/2.55) + "%");
         version_code.setText("version:"+APKVersionInfoUtils.getVersionName(mContext));
         dialog = new PromptDialog(MainActivity.this);
