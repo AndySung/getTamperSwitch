@@ -5,6 +5,7 @@
 ```shell
  gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
+           //options.compilerArgs.add('-Xbootclasspath/p:D:\\Andy\\elan_master\\nsc_elan\\GVIEWER_ANDROID\\GVIEWER_HR40\\app\\libs\\HR40.jar')
             options.compilerArgs.add('-Xbootclasspath/p:D:/Andy/android_project/getTamperSwitch/app/libs/HR40.jar')
            //options.compilerArgs.add('-Xbootclasspath/p:app\\libs\\HR40_KeyEvent.jar')  // 相对路径不成功. 最新版本 Android Studio 成功.
         }
